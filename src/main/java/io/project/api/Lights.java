@@ -1,3 +1,5 @@
+package io.project.api;
+
 public class Lights {
 
     int position;

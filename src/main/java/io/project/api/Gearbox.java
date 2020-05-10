@@ -1,3 +1,5 @@
+package io.project.api;
+
 public class Gearbox {
 
     private int maxDrive;
