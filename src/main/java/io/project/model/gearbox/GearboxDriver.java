@@ -3,6 +3,8 @@ package io.project.model.gearbox;
 import io.project.api.ExternalSystems;
 import io.project.api.Gearbox;
 import io.project.model.gashandler.GasThreshold;
+import io.project.model.gearbox.drivemode.DriveMode;
+import io.project.model.gearbox.drivemode.DriveModeStrategyFactory;
 import io.project.model.observer.AcceleratorObserver;
 
 public class GearboxDriver implements AcceleratorObserver {
@@ -12,10 +14,14 @@ public class GearboxDriver implements AcceleratorObserver {
 
     private final Gearbox gearbox;
     private final ExternalSystems externalSystems;
+    private final DriveModeStrategyFactory driveModeStrategyFactory;
 
-    public GearboxDriver(Gearbox gearbox, ExternalSystems externalSystems) {
+    private DriveMode driveMode = DriveMode.COMFORT;
+
+    public GearboxDriver(Gearbox gearbox, ExternalSystems externalSystems, DriveModeStrategyFactory driveModeStrategyFactory) {
         this.gearbox = gearbox;
         this.externalSystems = externalSystems;
+        this.driveModeStrategyFactory = driveModeStrategyFactory;
     }
 
     @Override
@@ -23,28 +29,7 @@ public class GearboxDriver implements AcceleratorObserver {
         if ((int) gearbox.getState() == 1) {
             double currentRpm = externalSystems.getCurrentRpm();
 
-            if (currentRpm > (Double) characteristics[0]) {
-                if (ensureMaxDriveNotReached()) {
-                    gearbox.setCurrentGear(getCurrentGear() + 1);
-                }
-            }
-            if (currentRpm < (Double) characteristics[1]) {
-                if (ensureLowestDriveNotReached()) {
-                    gearbox.setCurrentGear(getCurrentGear() - 1);
-                }
-            }
+            driveModeStrategyFactory.getHandlingStrategyForMode(driveMode).handleAccelerationWith(gasThreshold, gearbox, characteristics, currentRpm);
         }
-    }
-
-    private boolean ensureLowestDriveNotReached() {
-        return getCurrentGear() != 1;
-    }
-
-    private boolean ensureMaxDriveNotReached() {
-        return getCurrentGear() != gearbox.getMaxDrive();
-    }
-
-    private int getCurrentGear() {
-        return (int) gearbox.getCurrentGear();
     }
 }
