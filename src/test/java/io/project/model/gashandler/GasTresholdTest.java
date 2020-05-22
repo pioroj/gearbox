@@ -1,5 +1,6 @@
 package io.project.model.gashandler;
 
+import io.project.model.gearbox.GasThreshold;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

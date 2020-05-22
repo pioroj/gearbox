@@ -1,6 +1,6 @@
 package io.project.model.gearbox.calculator;
 
-import io.project.model.gashandler.GasThreshold;
+import io.project.model.gearbox.GasThreshold;
 import io.project.model.gearbox.AggressiveMode;
 import io.project.model.gearbox.GasThresholdRange;
 import io.project.model.gearbox.Gear;

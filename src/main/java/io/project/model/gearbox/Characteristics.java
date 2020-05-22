@@ -1,7 +1,5 @@
 package io.project.model.gearbox;
 
-import io.project.model.gashandler.GasThreshold;
-
 public class Characteristics {
 
     private Object[] characteristics = new Object[]{2000d, 1000d, 1000d, 0.5d, 2500d, 4500d, 1500d, 0.5d, 5000d, 0.7d,

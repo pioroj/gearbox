@@ -1,7 +1,5 @@
 package io.project.model.gearbox;
 
-import io.project.model.gashandler.GasThreshold;
-
 public class GasThresholdRange {
 
     private final GasThreshold singleKickdownBoundary;

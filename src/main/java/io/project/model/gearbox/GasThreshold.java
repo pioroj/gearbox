@@ -1,4 +1,4 @@
-package io.project.model.gashandler;
+package io.project.model.gearbox;
 
 import java.util.Objects;
 
@@ -20,7 +20,7 @@ public class GasThreshold {
         return new GasThreshold(1.0d);
     }
 
-    double getPressLevel() {
+    public double getPressLevel() {
         return pressLevel;
     }
 

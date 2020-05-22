@@ -1,7 +1,6 @@
-package io.project.model.gashandler;
+package io.project.model.observer;
 
-import io.project.model.observer.AcceleratorObservable;
-import io.project.model.observer.AcceleratorObserver;
+import io.project.model.gearbox.GasThreshold;
 
 import java.util.List;
 

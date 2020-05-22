@@ -1,6 +1,5 @@
 package io.project.model.gearbox;
 
-import io.project.model.gashandler.GasThreshold;
 import io.project.model.gearbox.adapter.AngularSpeedProvider;
 import io.project.model.gearbox.adapter.GearboxACL;
 import io.project.model.gearbox.adapter.RPMProvider;
