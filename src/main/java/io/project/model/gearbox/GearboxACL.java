@@ -17,4 +17,8 @@ class GearboxACL {
     Gear currentGear() {
         return new Gear((Integer) gearbox.getCurrentGear());
     }
+
+    Gear getMaxDrive() {
+        return new Gear(gearbox.getMaxDrive());
+    }
 }

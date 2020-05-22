@@ -51,4 +51,36 @@ public class GearboxDriverTest {
 
         assertEquals(gearbox.getCurrentGear(), 1);
     }
+
+    @Test
+    void shouldManualChangeGearDown() {
+        gearbox.setCurrentGear(2);
+        Gear gear = gearboxDriver.manualChangeGearDown();
+
+        assertEquals(1, gear.toIntValue());
+    }
+
+    @Test
+    void shouldManualChangeGearUp() {
+        gearbox.setCurrentGear(2);
+        Gear gear = gearboxDriver.manualChangeGearUp();
+
+        assertEquals(3, gear.toIntValue());
+    }
+
+    @Test
+    void shouldManualChangeGearDown_notExceedingGearboxLimit() {
+        gearbox.setCurrentGear(1);
+        Gear gear = gearboxDriver.manualChangeGearDown();
+
+        assertEquals(1, gear.toIntValue());
+    }
+
+    @Test
+    void shouldManualChangeGearUp_notExceedingGearboxLimit() {
+        gearbox.setCurrentGear(8);
+        Gear gear = gearboxDriver.manualChangeGearUp();
+
+        assertEquals(8, gear.toIntValue());
+    }
 }

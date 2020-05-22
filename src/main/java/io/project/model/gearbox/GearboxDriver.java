@@ -31,4 +31,16 @@ public class GearboxDriver implements AcceleratorObserver {
             gearboxACL.changeGearTo(newGear);
         }
     }
+
+    Gear manualChangeGearDown() {
+        return prepareCurrentGearRange().downshift(gearboxACL.currentGear());
+    }
+
+    Gear manualChangeGearUp() {
+        return prepareCurrentGearRange().upshift(gearboxACL.currentGear());
+    }
+
+    private GearRange prepareCurrentGearRange() {
+        return new GearRange(Gear.minDrivingGear(), gearboxACL.getMaxDrive());
+    }
 }

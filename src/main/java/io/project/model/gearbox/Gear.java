@@ -17,6 +17,10 @@ public class Gear {
         return new Gear(gear);
     }
 
+    public static Gear minDrivingGear() {
+        return new Gear(1);
+    }
+
     Gear upshift() {
         return of(numRepresentation + 1);
     }
