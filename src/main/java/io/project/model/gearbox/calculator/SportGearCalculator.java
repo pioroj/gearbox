@@ -21,7 +21,7 @@ public class SportGearCalculator implements GearCalculator {
     }
 
     @Override
-    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode) {
+    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode, double angularSpeed) {
         optimalRpmRange = optimalRpmRange.apply(aggressiveMode);
         if (gasThresholdRange.isNoKickdown(gasThreshold)) {
             if (currentRpm.isAbove(optimalRpmRange)) {

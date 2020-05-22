@@ -7,6 +7,6 @@ import io.project.model.gearbox.RPM;
 
 public interface GearCalculator {
 
-    Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode);
+    Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode, double angularSpeed);
 
 }

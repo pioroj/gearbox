@@ -1,16 +1,17 @@
-package io.project.model.gearbox;
+package io.project.model.gearbox.adapter;
 
 import io.project.api.ExternalSystems;
+import io.project.model.gearbox.RPM;
 
-class RPMProvider {
+public class RPMProvider {
 
     private final ExternalSystems externalSystems;
 
-    RPMProvider(ExternalSystems externalSystems) {
+    public RPMProvider(ExternalSystems externalSystems) {
         this.externalSystems = externalSystems;
     }
 
-    RPM current() {
+    public RPM current() {
         return RPM.rpm(externalSystems.getCurrentRpm());
     }
 

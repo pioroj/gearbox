@@ -6,7 +6,7 @@ public class Gear {
 
     private final Integer numRepresentation;
 
-    Gear(Integer numRepresentation) {
+    public Gear(Integer numRepresentation) {
         if (numRepresentation < 0) {
             throw new IllegalArgumentException("Negative gear: " + numRepresentation);
         }
@@ -37,7 +37,7 @@ public class Gear {
         return numRepresentation.compareTo(gear.numRepresentation) <= 0;
     }
 
-    int toIntValue() {
+    public int toIntValue() {
         return numRepresentation;
     }
 

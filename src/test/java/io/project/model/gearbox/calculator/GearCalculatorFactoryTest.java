@@ -14,9 +14,11 @@ public class GearCalculatorFactoryTest {
         GearCalculator ecoGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.ECO);
         GearCalculator comfortGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.COMFORT);
         GearCalculator sportGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.SPORT);
+        GearCalculator mDynamicGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.M_DYNAMIC);
 
         assertEquals(EcoGearCalculator.class, ecoGearCalculator.getClass());
         assertEquals(ComfortGearCalculator.class, comfortGearCalculator.getClass());
         assertEquals(SportGearCalculator.class, sportGearCalculator.getClass());
+        assertEquals(MDynamicGearCalculator.class, mDynamicGearCalculator.getClass());
     }
 }

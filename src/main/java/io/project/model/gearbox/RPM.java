@@ -21,7 +21,7 @@ public class RPM implements Comparable<RPM> {
         return new RPM(rpm);
     }
 
-    static RPM rpm(double rpm) {
+    public static RPM rpm(double rpm) {
         return new RPM((long) rpm);
     }
 

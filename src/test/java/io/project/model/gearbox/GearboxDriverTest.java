@@ -3,6 +3,9 @@ package io.project.model.gearbox;
 import io.project.api.ExternalSystems;
 import io.project.api.Gearbox;
 import io.project.model.gashandler.GasThreshold;
+import io.project.model.gearbox.adapter.AngularSpeedProvider;
+import io.project.model.gearbox.adapter.GearboxACL;
+import io.project.model.gearbox.adapter.RPMProvider;
 import io.project.model.gearbox.calculator.GearCalculatorFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,6 +19,7 @@ public class GearboxDriverTest {
 
     private GearboxACL gearboxACL;
     private RPMProvider rpmProvider;
+    private AngularSpeedProvider angularSpeedProvider;
     private GearboxDriver gearboxDriver;
     private GearCalculatorFactory gearCalculatorFactory = new GearCalculatorFactory();
 
@@ -27,7 +31,8 @@ public class GearboxDriverTest {
 
         externalSystems.setCurrentRpm(2000d);
         rpmProvider = new RPMProvider(externalSystems);
-        gearboxDriver = new GearboxDriver(gearboxACL, rpmProvider, gearCalculatorFactory);
+        angularSpeedProvider = new AngularSpeedProvider(externalSystems);
+        gearboxDriver = new GearboxDriver(gearboxACL, rpmProvider, angularSpeedProvider, gearCalculatorFactory);
     }
 
     @Test

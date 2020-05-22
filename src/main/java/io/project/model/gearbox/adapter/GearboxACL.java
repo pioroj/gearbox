@@ -1,24 +1,25 @@
-package io.project.model.gearbox;
+package io.project.model.gearbox.adapter;
 
 import io.project.api.Gearbox;
+import io.project.model.gearbox.Gear;
 
-class GearboxACL {
+public class GearboxACL {
 
     private final Gearbox gearbox;
 
-    GearboxACL(Gearbox gearbox) {
+    public GearboxACL(Gearbox gearbox) {
         this.gearbox = gearbox;
     }
 
-    void changeGearTo(Gear newGear) {
+    public void changeGearTo(Gear newGear) {
         gearbox.setCurrentGear(newGear.toIntValue());
     }
 
-    Gear currentGear() {
+    public Gear currentGear() {
         return new Gear((Integer) gearbox.getCurrentGear());
     }
 
-    Gear getMaxDrive() {
+    public Gear getMaxDrive() {
         return new Gear(gearbox.getMaxDrive());
     }
 }

@@ -1,5 +1,6 @@
 package io.project.model.gearbox.calculator;
 
+import io.project.model.gearbox.adapter.AngularSpeedRange;
 import io.project.model.gearbox.Characteristics;
 import io.project.model.gearbox.DriveMode;
 import io.project.model.gearbox.Gear;
@@ -30,10 +31,13 @@ public class GearCalculatorFactory {
             new GearRange(Gear.of(1), Gear.of(8)),
             doubleKickdownRange(characteristics.lowerSportGasThreshold(), characteristics.higherSportGasThreshold()));
 
+    private MDynamicGearCalculator mDynamicGearCalculator = new MDynamicGearCalculator(new AngularSpeedRange(100, 200));
+
     private final Map<DriveMode, ? extends GearCalculator> strategiesMap = Map.of(
             DriveMode.ECO, ecoGearCalculator,
             DriveMode.COMFORT, comfortGearCalculator,
-            DriveMode.SPORT, sportGearCalculator
+            DriveMode.SPORT, sportGearCalculator,
+            DriveMode.M_DYNAMIC,mDynamicGearCalculator
     );
 
     public GearCalculator getGearCalculatorStrategyFor(DriveMode driveMode) {
