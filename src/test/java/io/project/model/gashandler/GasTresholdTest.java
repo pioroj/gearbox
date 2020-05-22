@@ -9,8 +9,8 @@ public class GasTresholdTest {
 
     @Test
     void shouldCreateValidGasThreshold() {
-        GasThreshold gasThreshold = new GasThreshold(12);
-        assertEquals(12, gasThreshold.getPressLevel());
+        GasThreshold gasThreshold = new GasThreshold(0.5d);
+        assertEquals(0.5d, gasThreshold.getPressLevel());
     }
 
     @Test

@@ -1,4 +1,4 @@
-package io.project.model.gearbox.drivemode;
+package io.project.model.gearbox;
 
 public enum DriveMode {
     ECO, COMFORT, SPORT
