@@ -16,6 +16,7 @@ public class GearboxDriver implements AcceleratorObserver {
 
     private DriverState driverState = DriverState.DRIVE;
     private DriveMode driveMode = DriveMode.COMFORT;
+    private AggressiveMode aggressiveMode = AggressiveMode.BASIC;
 
     GearboxDriver(GearboxACL gearboxACL, RPMProvider rpmProvider, GearCalculatorFactory gearCalculatorFactory) {
         this.gearboxACL = gearboxACL;
@@ -26,8 +27,8 @@ public class GearboxDriver implements AcceleratorObserver {
     @Override
     public void handleAccelerationWith(GasThreshold gasThreshold) {
         if (driverState == DriverState.DRIVE) {
-            Gear newGear = gearCalculatorFactory.getHandlingStrategyFor(driveMode)
-                    .calculateGear(rpmProvider.current(), gearboxACL.currentGear(), gasThreshold);
+            Gear newGear = gearCalculatorFactory.getGearCalculatorStrategyFor(driveMode)
+                    .calculateGear(rpmProvider.current(), gearboxACL.currentGear(), gasThreshold, aggressiveMode);
             gearboxACL.changeGearTo(newGear);
         }
     }

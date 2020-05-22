@@ -1,6 +1,7 @@
 package io.project.model.gearbox.calculator;
 
 import io.project.model.gashandler.GasThreshold;
+import io.project.model.gearbox.AggressiveMode;
 import io.project.model.gearbox.GasThresholdRange;
 import io.project.model.gearbox.Gear;
 import io.project.model.gearbox.GearRange;
@@ -20,7 +21,8 @@ public class ComfortGearCalculator implements GearCalculator {
     }
 
     @Override
-    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold) {
+    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode) {
+        optimalRpmRange = optimalRpmRange.apply(aggressiveMode);
         if (gasThresholdRange.isNoKickdown(gasThreshold)) {
             if (currentRpm.isAbove(optimalRpmRange)) {
                 return gearRange.upshift(currentGear);

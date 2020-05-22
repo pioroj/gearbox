@@ -36,7 +36,7 @@ public class GearCalculatorFactory {
             DriveMode.SPORT, sportGearCalculator
     );
 
-    public GearCalculator getHandlingStrategyFor(DriveMode driveMode) {
+    public GearCalculator getGearCalculatorStrategyFor(DriveMode driveMode) {
         return strategiesMap.get(driveMode);
     }
 

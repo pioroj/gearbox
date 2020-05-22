@@ -4,6 +4,9 @@ import java.util.Objects;
 
 public class RpmRange {
 
+    private final double MEDIUM_AGGRESIVE_MODE_MULTIPLIER = 1.2d;
+    private final double HIGH_AGGRESIVE_MODE_MULTIPLIER = 1.3d;
+
     private final RPM left;
     private final RPM right;
 
@@ -21,6 +24,18 @@ public class RpmRange {
 
     boolean endSmallerThan(RPM rpm) {
         return right.compareTo(rpm) < 0;
+    }
+
+    public RpmRange apply(AggressiveMode aggressiveMode) {
+        switch (aggressiveMode) {
+            case BASIC:
+                return this;
+            case MEDIUM:
+                return new RpmRange(left.multiplyBy(MEDIUM_AGGRESIVE_MODE_MULTIPLIER), right.multiplyBy(MEDIUM_AGGRESIVE_MODE_MULTIPLIER));
+            case HIGH:
+                return new RpmRange(left.multiplyBy(HIGH_AGGRESIVE_MODE_MULTIPLIER), right.multiplyBy(HIGH_AGGRESIVE_MODE_MULTIPLIER));
+        }
+        return this;
     }
 
     @Override

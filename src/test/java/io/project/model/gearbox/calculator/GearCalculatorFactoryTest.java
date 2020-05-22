@@ -11,9 +11,9 @@ public class GearCalculatorFactoryTest {
 
     @Test
     void shouldReturnProperStrategy() {
-        GearCalculator ecoGearCalculator = gearCalculatorFactory.getHandlingStrategyFor(DriveMode.ECO);
-        GearCalculator comfortGearCalculator = gearCalculatorFactory.getHandlingStrategyFor(DriveMode.COMFORT);
-        GearCalculator sportGearCalculator = gearCalculatorFactory.getHandlingStrategyFor(DriveMode.SPORT);
+        GearCalculator ecoGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.ECO);
+        GearCalculator comfortGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.COMFORT);
+        GearCalculator sportGearCalculator = gearCalculatorFactory.getGearCalculatorStrategyFor(DriveMode.SPORT);
 
         assertEquals(EcoGearCalculator.class, ecoGearCalculator.getClass());
         assertEquals(ComfortGearCalculator.class, comfortGearCalculator.getClass());
