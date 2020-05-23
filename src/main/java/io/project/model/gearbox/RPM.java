@@ -33,6 +33,10 @@ public class RPM implements Comparable<RPM> {
         return rpmRange.startGreaterThan(this);
     }
 
+    public boolean isBelow(RPM otherRPM) {
+        return this.rpm < otherRPM.rpm;
+    }
+
     RPM multiplyBy(double multiplier) {
         long newRPM = Math.round(this.rpm * multiplier);
         return new RPM(newRPM);

@@ -1,7 +1,5 @@
 package io.project.model.gearbox.calculator;
 
-import io.project.model.gearbox.GasThreshold;
-import io.project.model.gearbox.AggressiveMode;
 import io.project.model.gearbox.GasThresholdRange;
 import io.project.model.gearbox.Gear;
 import io.project.model.gearbox.GearRange;
@@ -13,29 +11,39 @@ public class SportGearCalculator implements GearCalculator {
     private RpmRange optimalRpmRange;
     private GearRange gearRange;
     private GasThresholdRange gasThresholdRange;
+    private RPM reductionRpm;
 
-    SportGearCalculator(RpmRange rpmRange, GearRange gearRange, GasThresholdRange gasThresholdRange) {
+    SportGearCalculator(RpmRange rpmRange, GearRange gearRange, GasThresholdRange gasThresholdRange, RPM reductionRpm) {
         this.optimalRpmRange = rpmRange;
         this.gearRange = gearRange;
         this.gasThresholdRange = gasThresholdRange;
+        this.reductionRpm = reductionRpm;
     }
 
     @Override
-    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode, double angularSpeed) {
-        optimalRpmRange = optimalRpmRange.apply(aggressiveMode);
-        if (gasThresholdRange.isNoKickdown(gasThreshold)) {
-            if (currentRpm.isAbove(optimalRpmRange)) {
-                return gearRange.upshift(currentGear);
+    public Gear calculateGear(CalculatorInputData calculatorInputData) {
+        optimalRpmRange = optimalRpmRange.apply(calculatorInputData.getAggressiveMode());
+
+        if (calculatorInputData.isTrailerAttached() && calculatorInputData.isVehicleDrivingDown()) {
+            if (calculatorInputData.getCurrentRpm().isBelow(reductionRpm)) {
+                return gearRange.downshift(calculatorInputData.getCurrentGear());
             }
-            if (currentRpm.isBelow(optimalRpmRange)) {
-                return gearRange.downshift(currentGear);
+        }
+
+        if (gasThresholdRange.isNoKickdown(calculatorInputData.getGasThreshold())) {
+            if (calculatorInputData.getCurrentRpm().isAbove(optimalRpmRange)) {
+                return gearRange.upshift(calculatorInputData.getCurrentGear());
             }
-        } else if (gasThresholdRange.isSingleKickdown(gasThreshold)) {
-            return gearRange.downshift(currentGear);
-        } else if (gasThresholdRange.isDoubleKickdown(gasThreshold)) {
-            Gear downshiftedOnceGear = gearRange.downshift(currentGear);
+            if (calculatorInputData.getCurrentRpm().isBelow(optimalRpmRange)) {
+                return gearRange.downshift(calculatorInputData.getCurrentGear());
+            }
+        } else if (gasThresholdRange.isSingleKickdown(calculatorInputData.getGasThreshold())) {
+            return gearRange.downshift(calculatorInputData.getCurrentGear());
+        } else if (gasThresholdRange.isDoubleKickdown(calculatorInputData.getGasThreshold())) {
+            Gear downshiftedOnceGear = gearRange.downshift(calculatorInputData.getCurrentGear());
             return gearRange.downshift(downshiftedOnceGear);
         }
-        return currentGear;
+
+        return calculatorInputData.getCurrentGear();
     }
 }

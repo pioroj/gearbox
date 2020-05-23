@@ -28,4 +28,16 @@ public class Characteristics {
     public GasThreshold higherSportGasThreshold() {
         return new GasThreshold((Double) characteristics[9]);
     }
+
+    public RPM ecoReductionRpm() {
+        return RPM.rpm((double) characteristics[12]);
+    }
+
+    public RPM comfortReductionRpm() {
+        return RPM.rpm((double) characteristics[13]);
+    }
+
+    public RPM sportReductionRpm() {
+        return RPM.rpm((double) characteristics[14]);
+    }
 }

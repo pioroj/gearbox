@@ -1,10 +1,7 @@
 package io.project.model.gearbox.calculator;
 
-import io.project.model.gearbox.GasThreshold;
-import io.project.model.gearbox.AggressiveMode;
-import io.project.model.gearbox.adapter.AngularSpeedRange;
 import io.project.model.gearbox.Gear;
-import io.project.model.gearbox.RPM;
+import io.project.model.gearbox.adapter.AngularSpeedRange;
 
 public class MDynamicGearCalculator implements GearCalculator {
 
@@ -15,11 +12,11 @@ public class MDynamicGearCalculator implements GearCalculator {
     }
 
     @Override
-    public Gear calculateGear(RPM currentRpm, Gear currentGear, GasThreshold gasThreshold, AggressiveMode aggressiveMode, double angularSpeed) {
-        if (angularSpeedRange.covers(angularSpeed)) {
-            return currentGear;
+    public Gear calculateGear(CalculatorInputData calculatorInputData) {
+        if (angularSpeedRange.covers(calculatorInputData.getAngularSpeed())) {
+            return calculatorInputData.getCurrentGear();
         }
-        return currentGear; //it's awful but there is no proper characteristics provided. So, here should be standard handling like in other calculators
+        return calculatorInputData.getCurrentGear(); //it's awful but there is no proper characteristics provided. So, here should be standard handling like in other calculators
     }
 
 }

@@ -1,10 +1,10 @@
 package io.project.model.gearbox.calculator;
 
-import io.project.model.gearbox.adapter.AngularSpeedRange;
 import io.project.model.gearbox.Characteristics;
 import io.project.model.gearbox.DriveMode;
 import io.project.model.gearbox.Gear;
 import io.project.model.gearbox.GearRange;
+import io.project.model.gearbox.adapter.AngularSpeedRange;
 
 import java.util.Map;
 
@@ -19,17 +19,20 @@ public class GearCalculatorFactory {
     private EcoGearCalculator ecoGearCalculator = new EcoGearCalculator(
             characteristics.optimalRpmRangeInEcoMode(),
             new GearRange(Gear.of(1), Gear.of(8)),
-            noKickdownRange());
+            noKickdownRange(),
+            characteristics.ecoReductionRpm());
 
     private ComfortGearCalculator comfortGearCalculator = new ComfortGearCalculator(
             characteristics.optimalRpmRangeInComfortMode(),
             new GearRange(Gear.of(1), Gear.of(8)),
-            singleKickdownRange(characteristics.singleComfortGasThreshold()));
+            singleKickdownRange(characteristics.singleComfortGasThreshold()),
+            characteristics.comfortReductionRpm());
 
     private SportGearCalculator sportGearCalculator = new SportGearCalculator(
             characteristics.optimalRpmRangeInSportMode(),
             new GearRange(Gear.of(1), Gear.of(8)),
-            doubleKickdownRange(characteristics.lowerSportGasThreshold(), characteristics.higherSportGasThreshold()));
+            doubleKickdownRange(characteristics.lowerSportGasThreshold(), characteristics.higherSportGasThreshold()),
+            characteristics.sportReductionRpm());
 
     private MDynamicGearCalculator mDynamicGearCalculator = new MDynamicGearCalculator(new AngularSpeedRange(100, 200));
 
